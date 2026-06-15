@@ -707,20 +707,74 @@ h3 {
 
 .resume-courier {
   position: relative;
-  min-height: 11rem;
+  min-height: 15rem;
   display: grid;
   place-items: center;
   color: #10212b;
   text-decoration: none;
+  cursor: pointer;
+  isolation: isolate;
+  border: 1px solid rgba(18, 65, 83, 0.16);
+  border-radius: 8px;
+  background:
+    radial-gradient(circle at 70% 28%, rgba(42, 216, 201, 0.18), transparent 9rem),
+    rgba(255, 255, 255, 0.48);
+  overflow: hidden;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
 .resume-courier::before {
   content: "";
   position: absolute;
+  left: 1.1rem;
+  right: 1.1rem;
+  top: 48%;
+  z-index: 0;
+  border-top: 2px dashed rgba(35, 105, 166, 0.24);
+}
+
+.resume-courier-label {
+  position: absolute;
   left: 1rem;
-  right: 1rem;
-  top: 45%;
-  border-top: 2px dashed rgba(35, 105, 166, 0.28);
+  top: 1rem;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.45rem;
+  padding: 0 0.9rem;
+  border-radius: 999px;
+  background: var(--cyan);
+  color: #062029;
+  font-size: 0.84rem;
+  font-weight: 850;
+  box-shadow: 0 14px 28px rgba(42, 216, 201, 0.22);
+}
+
+.bird-photo {
+  position: absolute;
+  z-index: 3;
+  width: min(18rem, 76vw);
+  height: auto;
+  max-width: none;
+  animation: birdFlight 7.2s ease-in-out infinite;
+  filter: drop-shadow(0 20px 24px rgba(14, 23, 43, 0.18));
+  pointer-events: none;
+  transform-origin: 62% 48%;
+}
+
+.resume-courier:hover,
+.resume-courier:focus-visible {
+  border-color: rgba(42, 216, 201, 0.55);
+  box-shadow: 0 20px 42px rgba(14, 23, 43, 0.14);
+  transform: translateY(-2px);
+}
+
+.resume-courier:hover .bird-photo,
+.resume-courier:focus-visible .bird-photo {
+  animation-duration: 4.2s;
 }
 
 .bird-icon {
@@ -751,9 +805,9 @@ h3 {
 
 .resume-paper {
   position: absolute;
-  z-index: 1;
-  right: clamp(0.5rem, 6vw, 2rem);
-  bottom: 0.85rem;
+  z-index: 2;
+  right: clamp(0.8rem, 5vw, 2.2rem);
+  bottom: 1.2rem;
   display: inline-grid;
   place-items: center;
   width: 6.3rem;
@@ -770,11 +824,6 @@ h3 {
   text-transform: uppercase;
   transform: rotate(5deg);
   box-shadow: 0 16px 28px rgba(14, 23, 43, 0.14);
-}
-
-.resume-courier:hover .bird-icon,
-.resume-courier:focus-visible .bird-icon {
-  animation-duration: 2.5s;
 }
 
 .contact-layout {
@@ -895,6 +944,28 @@ h3 {
 
   50% {
     transform: translate3d(0.45rem, -0.65rem, 0) rotate(2deg);
+  }
+}
+
+@keyframes birdFlight {
+  0% {
+    transform: translate3d(-3.8rem, -1rem, 0) rotate(-5deg) scale(0.94);
+  }
+
+  24% {
+    transform: translate3d(2.7rem, -2.2rem, 0) rotate(4deg) scale(1);
+  }
+
+  50% {
+    transform: translate3d(3.9rem, 1.25rem, 0) rotate(2deg) scale(0.98);
+  }
+
+  74% {
+    transform: translate3d(-2.2rem, 1.65rem, 0) rotate(-4deg) scale(1.02);
+  }
+
+  100% {
+    transform: translate3d(-3.8rem, -1rem, 0) rotate(-5deg) scale(0.94);
   }
 }
 
@@ -1043,7 +1114,24 @@ h3 {
   }
 
   .resume-courier {
-    min-height: 9.5rem;
+    min-height: 13.5rem;
+  }
+
+  .bird-photo {
+    width: min(15.5rem, 78vw);
+  }
+
+  .resume-courier-label {
+    left: 0.8rem;
+    top: 0.8rem;
+  }
+
+  .resume-paper {
+    right: 0.85rem;
+    bottom: 0.85rem;
+    width: 5.7rem;
+    min-height: 4.2rem;
+    font-size: 0.72rem;
   }
 
   .project-card,
@@ -1066,5 +1154,9 @@ h3 {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
+  }
+
+  .bird-photo {
+    transform: translate3d(0, 0, 0) rotate(-2deg) scale(1) !important;
   }
 }
